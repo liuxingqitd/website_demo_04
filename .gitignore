@@ -1,0 +1,16 @@
+# 临时文件与截图
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg.bak
+.DS_Store
+
+# Node / 依赖
+node_modules/
+npm-debug.log*
+
+# 本地环境
+.env
+.env.local

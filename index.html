@@ -62,16 +62,34 @@
     .feat-visual::after { content:""; position:absolute; inset:0; border-radius:18px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.4); pointer-events:none; }
 
     /* ===== 第3屏 参数 Specs ===== */
-    .specs { background:var(--bone-deep); padding:5.5rem 0; }
-    .specs-head { max-width:640px; margin-bottom:3rem; }
+    .specs { background:var(--bone-deep); padding:6rem 0; }
+    .specs-head { max-width:620px; margin-bottom:3rem; }
     .specs-head .eyebrow-level { display:block; margin-bottom:1rem; }
     .specs-head h2 { font-size:clamp(1.8rem,3.6vw,2.7rem); font-weight:800; letter-spacing:-.02em; color:var(--text-strong); }
-    .spec-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; }
-    .spec-card { background:var(--bone); border:1px solid var(--hairline); border-radius:16px; padding:1.8rem 1.6rem; transition:transform .25s ease, box-shadow .25s ease; }
-    .spec-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(16,26,19,.1); }
-    .spec-card small { display:block; font-size:.8rem; letter-spacing:.08em; color:var(--text-muted); text-transform:uppercase; }
-    .spec-card b { display:block; margin-top:.5rem; font-family:var(--font-num); font-size:1.8rem; font-weight:700; letter-spacing:-.02em; color:var(--ink-deep); }
-    .spec-card p { margin-top:.6rem; font-size:.86rem; color:var(--text-muted); }
+    /* 主次布局：左材质图 + 右规格 */
+    .specs-layout { display:grid; grid-template-columns:1.05fr 1.25fr; gap:3rem; align-items:stretch; }
+    .specs-visual { position:relative; min-height:420px; border-radius:20px; overflow:hidden; }
+    .specs-visual img { width:100%; height:100%; object-fit:cover; display:block; }
+    .specs-visual::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(12,23,16,.55), transparent 50%); }
+    .specs-visual .cap { position:absolute; left:1.5rem; bottom:1.4rem; z-index:2; color:var(--bone); }
+    .specs-visual .cap b { display:block; font-size:1.05rem; font-weight:700; }
+    .specs-visual .cap span { font-size:.82rem; color:rgba(245,246,242,.8); }
+
+    /* 主打规格：深绿 tile + 琥珀大数字 */
+    .spec-hero { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
+    .spec-tile { position:relative; background:linear-gradient(150deg, var(--ink-soft), var(--ink-deep)); border-radius:16px; padding:1.6rem 1.5rem; overflow:hidden; }
+    .spec-tile::before { content:""; position:absolute; width:120px; height:120px; right:-30px; top:-30px; background:radial-gradient(circle, rgba(224,147,60,.28), transparent 70%); filter:blur(10px); }
+    .spec-tile small { display:block; font-size:.78rem; letter-spacing:.08em; color:rgba(245,246,242,.7); text-transform:uppercase; }
+    .spec-tile .num { display:flex; align-items:baseline; gap:.35rem; margin-top:.6rem; }
+    .spec-tile .num b { font-family:var(--font-num); font-size:clamp(1.9rem,4vw,2.6rem); font-weight:800; letter-spacing:-.03em; color:var(--amber); }
+    .spec-tile .num i { font-style:normal; font-size:1rem; color:rgba(245,246,242,.85); }
+    .spec-tile p { margin-top:.6rem; font-size:.84rem; color:rgba(245,246,242,.72); }
+
+    /* 次要规格：轻量内联行 */
+    .spec-minor { margin-top:1.4rem; display:grid; grid-template-columns:1fr 1fr; gap:.6rem 1.6rem; }
+    .minor-item { display:flex; align-items:baseline; justify-content:space-between; border-bottom:1px solid var(--hairline); padding:.55rem 0; }
+    .minor-item span { font-size:.82rem; color:var(--text-muted); }
+    .minor-item b { font-family:var(--font-num); font-size:.95rem; font-weight:700; color:var(--text-strong); }
 
     /* ===== 第4屏 场景图集 ===== */
     .gallery { background:var(--ink-deep); padding:5.5rem 0; }
@@ -127,10 +145,13 @@
       .gallery-grid { grid-template-columns:1fr; grid-template-rows:auto; }
       .g-card.tall { grid-row:auto; }
       .buy-inner { grid-template-columns:1fr; padding:4rem 0; }
+      .specs-layout { grid-template-columns:1fr; }
+      .specs-visual { min-height:300px; }
     }
     @media (max-width:600px) {
-      .spec-grid { grid-template-columns:1fr; }
       .spec-strip { grid-template-columns:1fr; }
+      .spec-hero { grid-template-columns:1fr; }
+      .spec-minor { grid-template-columns:1fr; }
     }
 
     /* 减弱动态 */
@@ -187,15 +208,29 @@
         <span class="eyebrow-level">规格一览</span>
         <h2>每一寸，都有它的理由。</h2>
       </div>
-      <div class="spec-grid">
-        <div class="spec-card"><small>总重量</small><b>1.9 kg</b><p>含地钉，整套带走无负担。</p></div>
-        <div class="spec-card"><small>适合人数</small><b>2 人</b><p>紧凑双人，单人或情侣都舒适。</p></div>
-        <div class="spec-card"><small>外帐防水</small><b>PU 5000mm</b><p>高防水压，连夜暴雨不怕。</p></div>
-        <div class="spec-card"><small>骨架材质</small><b>7001 铝合金</b><p>高强度轻量，抗风抗压。</p></div>
-        <div class="spec-card"><small>搭建方式</small><b>一体式速开</b><p>无需穿杆，三分钟归位。</p></div>
-        <div class="spec-card"><small>收纳尺寸</small><b>46 × 15 cm</b><p>背包侧袋或车顶箱都好放。</p></div>
-        <div class="spec-card"><small>适用季节</small><b>三季</b><p>春至深秋，够用。</p></div>
-        <div class="spec-card"><small>颜色</small><b>沙岩 / 森林绿</b><p>两种低调配色可选。</p></div>
+      <div class="specs-layout">
+        <!-- 左：帐篷材质特写 -->
+        <figure class="specs-visual">
+          <img src="./assets/product-02.jpg" alt="帐篷帆布黄铜杆材质特写" />
+          <figcaption class="cap"><b>帆布 与 铝杆</b><span>抗撕扯、抗压弯</span></figcaption>
+        </figure>
+
+        <!-- 右：主打规格 tile + 次要规格行 -->
+        <div class="specs-content">
+          <div class="spec-hero">
+            <div class="spec-tile"><small>总重量</small><div class="num"><b>1.9</b><i>kg</i></div><p>含地钉，整套带走无负担。</p></div>
+            <div class="spec-tile"><small>外帐防水</small><div class="num"><b>5000</b><i>mm</i></div><p>高防水压，连夜大雨不怕。</p></div>
+            <div class="spec-tile"><small>骨架材质</small><div class="num"><b>7001</b><i>铝</i></div><p>高强度，抗 6 级强风。</p></div>
+            <div class="spec-tile"><small>搭建速度</small><div class="num"><b>3</b><i>min</i></div><p>一体速开，雨来就归位。</p></div>
+          </div>
+
+          <div class="spec-minor">
+            <div class="minor-item"><span>适合人数</span><b>2 人</b></div>
+            <div class="minor-item"><span>收纳尺寸</span><b>46 × 15 cm</b></div>
+            <div class="minor-item"><span>适用季节</span><b>三季</b></div>
+            <div class="minor-item"><span>颜色</span><b>沙岩 / 森林绿</b></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>

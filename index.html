@@ -30,18 +30,18 @@
     .eyebrow-level { font-size:.72rem; letter-spacing:.22em; font-weight:600; color:var(--amber); }
 
     /* ===== 第1屏 Hero ===== */
-    .hero { position:relative; min-height:100dvh; display:flex; align-items:flex-end; overflow:hidden; }
+    .hero { position:relative; min-height:100dvh; display:flex; align-items:flex-start; overflow:hidden; }
     .hero-bg { position:absolute; inset:0; }
-    .hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center 62%; }
-    /* 左侧重、右侧轻的复合 scrim：文案在左列，右列雪山/草甸清爽露出 */
-    .hero-scrim { position:absolute; inset:0; background:linear-gradient(90deg, rgba(12,23,16,.86) 0%, rgba(12,23,16,.55) 34%, rgba(12,23,16,.18) 60%, rgba(12,23,16,.06) 82%), linear-gradient(180deg, rgba(12,23,16,.25) 0%, rgba(12,23,16,.65) 100%); }
-    /* 左右两栏：左文案列(限宽) + 右留白列 */
-    .hero-inner { position:relative; z-index:2; width:min(var(--max-w),92vw); margin-inline:auto; padding:0 0 5rem; }
-    .hero-copy { max-width:560px; }
+    .hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center 60%; }
+    /* 左上暗、右下亮：文案沉在左上幽暗区域, 帐篷(左中偏下)与雪山(右)完整露出 */
+    .hero-scrim { position:absolute; inset:0; background:linear-gradient(135deg, rgba(12,23,16,.82) 0%, rgba(12,23,16,.5) 30%, rgba(12,23,16,.16) 58%, rgba(12,23,16,.05) 80%), linear-gradient(180deg, rgba(12,23,16,.4) 0%, rgba(12,23,16,.05) 32%, rgba(12,23,16,.5) 100%); }
+    /* 文案列靠左上, 帐篷在下方作为产品主角完整展示 */
+    .hero-inner { position:relative; z-index:2; width:min(var(--max-w),92vw); margin-inline:auto; padding:5rem 0 5rem; }
+    .hero-copy { max-width:520px; }
     .hero-eyebrow { display:flex; align-items:center; gap:.8rem; margin-bottom:1.4rem; }
     .hero-eyebrow span { font-size:.75rem; letter-spacing:.3em; font-weight:600; color:var(--amber-glow); }
     .hero-eyebrow::before { content:""; width:44px; height:1px; background:var(--amber-glow); }
-    .hero h1 { font-size:clamp(2.4rem,5.5vw,4.2rem); font-weight:800; line-height:1.05; letter-spacing:-.03em; color:var(--bone); max-width:13em; text-wrap:balance; }
+    .hero h1 { font-size:clamp(2.4rem,5.5vw,4.1rem); font-weight:800; line-height:1.05; letter-spacing:-.03em; color:var(--bone); max-width:13em; text-wrap:balance; }
     .hero p { margin-top:1.4rem; color:rgba(245,246,242,.82); font-size:clamp(1rem,1.8vw,1.15rem); max-width:34ch; }
     .hero-cta { margin-top:2.2rem; display:flex; align-items:center; gap:1.4rem; }
     .btn { border:none; cursor:pointer; font-family:inherit; font-weight:600; font-size:1rem; border-radius:999px; padding:1rem 2.2rem; transition:transform .2s ease, box-shadow .2s ease, background .2s ease; }

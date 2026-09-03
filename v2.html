@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>云端 2 Pro · 三季速开帐篷</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      /* Forest 冷调高级绿 (避开 beige+brass 假高级) */
+      --ink-deep:#0c1710;    /* 深墨绿夜空 */
+      --ink-mid:#13241a;     /* 深区次级 */
+      --ink-soft:#1d3224;    /* 卡片深绿 */
+      --bone:#f5f6f2;        /* 骨白(浅区) */
+      --bone-deep:#eceee8;   /* 浅区次级 */
+      --text-strong:#101a13; /* 深区文字 */
+      --text-muted:#4a564c;  /* 浅区次要文字 */
+      --amber:#e0933c;       /* 琥珀(仅 CTA/强调) */
+      --amber-deep:#c67c28;
+      --amber-glow:#ffb45b;
+      --hairline:rgba(16,26,19,.08);
+      /* 字体 */
+      --font-sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+      --font-num:"SF Mono","Menlo","Consolas",monospace;
+      --max-w:1200px;
+    }
+    html { scroll-behavior:smooth; }
+    body { font-family:var(--font-sans); color:var(--text-strong); background:var(--bone); -webkit-font-smoothing:antialiased; line-height:1.6; overflow-x:hidden; }
+    .wrap { width:min(var(--max-w),92vw); margin-inline:auto; }
+    .eyebrow-level { font-size:.72rem; letter-spacing:.22em; font-weight:600; color:var(--amber); }
+
+    /* ===== 第1屏 Hero ===== */
+    .hero { position:relative; min-height:100dvh; display:flex; align-items:flex-end; overflow:hidden; }
+    .hero-bg { position:absolute; inset:0; }
+    .hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center 62%; }
+    .hero-scrim { position:absolute; inset:0; background:linear-gradient(15deg, rgba(12,23,16,.92) 0%, rgba(12,23,16,.55) 42%, rgba(12,23,16,.15) 70%); }
+    .hero-inner { position:relative; z-index:2; width:min(var(--max-w),92vw); margin-inline:auto; padding:0 0 6rem; }
+    .hero-eyebrow { display:flex; align-items:center; gap:.8rem; margin-bottom:1.4rem; }
+    .hero-eyebrow span { font-size:.75rem; letter-spacing:.3em; font-weight:600; color:var(--amber-glow); }
+    .hero-eyebrow::before { content:""; width:44px; height:1px; background:var(--amber-glow); }
+    .hero h1 { font-size:clamp(2.6rem,6.5vw,5rem); font-weight:800; line-height:1.03; letter-spacing:-.03em; color:var(--bone); max-width:14ch; }
+    .hero p { margin-top:1.4rem; color:rgba(245,246,242,.82); font-size:clamp(1rem,2vw,1.2rem); max-width:34ch; }
+    .hero-cta { margin-top:2.4rem; display:flex; align-items:center; gap:1.4rem; }
+    .btn { border:none; cursor:pointer; font-family:inherit; font-weight:600; font-size:1rem; border-radius:999px; padding:1rem 2.2rem; transition:transform .2s ease, box-shadow .2s ease, background .2s ease; }
+    .btn-primary { background:var(--amber); color:var(--ink-deep); box-shadow:0 12px 30px rgba(224,147,60,.35); }
+    .btn-primary:hover { transform:translateY(-2px); background:var(--amber-glow); }
+    .btn-ghost { background:transparent; color:var(--bone); border:1px solid rgba(245,246,242,.4); }
+    .btn-ghost:hover { border-color:var(--bone); background:rgba(245,246,242,.08); }
+    .hero-link { color:rgba(245,246,242,.85); font-size:.9rem; text-decoration:none; border-bottom:1px solid rgba(245,246,242,.35); padding-bottom:2px; }
+
+    /* ===== 第2屏 产品卖点 ===== */
+    .feat { background:var(--bone); padding:6rem 0; }
+    .feat-grid { display:grid; grid-template-columns:1.05fr 1.15fr; gap:3.5rem; align-items:center; }
+    .feat-copy .eyebrow-level { display:block; margin-bottom:1rem; }
+    .feat-copy h2 { font-size:clamp(1.8rem,3.6vw,2.7rem); font-weight:800; letter-spacing:-.02em; line-height:1.12; color:var(--text-strong); }
+    .feat-copy .lead { margin-top:1.2rem; color:var(--text-muted); max-width:46ch; }
+    .spec-strip { margin-top:2.6rem; display:grid; grid-template-columns:1fr 1fr; gap:1.6rem 2.4rem; }
+    .spec-item b { display:block; font-family:var(--font-num); font-size:1.9rem; font-weight:700; letter-spacing:-.02em; color:var(--ink-deep); }
+    .spec-item span { font-size:.86rem; color:var(--text-muted); }
+    .feat-visual { position:relative; }
+    .feat-visual img { width:100%; height:auto; display:block; border-radius:18px; box-shadow:0 30px 70px rgba(16,26,19,.18); }
+    .feat-visual::after { content:""; position:absolute; inset:0; border-radius:18px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.4); pointer-events:none; }
+
+    /* ===== 第3屏 参数 Specs ===== */
+    .specs { background:var(--bone-deep); padding:5.5rem 0; }
+    .specs-head { max-width:640px; margin-bottom:3rem; }
+    .specs-head .eyebrow-level { display:block; margin-bottom:1rem; }
+    .specs-head h2 { font-size:clamp(1.8rem,3.6vw,2.7rem); font-weight:800; letter-spacing:-.02em; color:var(--text-strong); }
+    .spec-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; }
+    .spec-card { background:var(--bone); border:1px solid var(--hairline); border-radius:16px; padding:1.8rem 1.6rem; transition:transform .25s ease, box-shadow .25s ease; }
+    .spec-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(16,26,19,.1); }
+    .spec-card small { display:block; font-size:.8rem; letter-spacing:.08em; color:var(--text-muted); text-transform:uppercase; }
+    .spec-card b { display:block; margin-top:.5rem; font-family:var(--font-num); font-size:1.8rem; font-weight:700; letter-spacing:-.02em; color:var(--ink-deep); }
+    .spec-card p { margin-top:.6rem; font-size:.86rem; color:var(--text-muted); }
+
+    /* ===== 第4屏 场景图集 ===== */
+    .gallery { background:var(--ink-deep); padding:5.5rem 0; }
+    .gallery-head { display:grid; grid-template-columns:1.6fr 1fr; gap:2rem; align-items:end; margin-bottom:3rem; }
+    .gallery-head h2 { font-size:clamp(1.8rem,3.6vw,2.7rem); font-weight:800; letter-spacing:-.02em; color:var(--bone); line-height:1.12; }
+    .gallery-head p { color:rgba(245,246,242,.72); max-width:34ch; justify-self:end; }
+    .gallery-grid { display:grid; grid-template-columns:1.3fr 1fr; grid-template-rows:1fr 1fr; gap:1.2rem; }
+    .g-card { position:relative; border-radius:16px; overflow:hidden; transition:transform .3s ease; }
+    .g-card:hover { transform:translateY(-4px); }
+    .g-card img { width:100%; height:100%; object-fit:cover; display:block; }
+    .g-card.tall { grid-row:span 2; }
+    .g-card::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(12,23,16,.55), transparent 45%); }
+    .g-cap { position:absolute; left:1.4rem; bottom:1.4rem; z-index:2; color:var(--bone); }
+    .g-cap b { display:block; font-size:1.1rem; font-weight:700; }
+    .g-cap span { font-size:.82rem; color:rgba(245,246,242,.75); }
+
+    /* ===== 第5屏 暴雨视频 ===== */
+    .storm { position:relative; min-height:92dvh; display:flex; align-items:center; overflow:hidden; }
+    .storm video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .storm-scrim { position:absolute; inset:0; background:radial-gradient(circle at 50% 40%, rgba(12,23,16,.35), rgba(12,23,16,.78)); }
+    .storm-inner { position:relative; z-index:2; width:min(var(--max-w),92vw); margin-inline:auto; text-align:center; }
+    .storm-inner .eyebrow-level { color:var(--amber-glow); letter-spacing:.3em; }
+    .storm-inner h2 { margin-top:1.2rem; font-size:clamp(2rem,5vw,3.6rem); font-weight:800; letter-spacing:-.02em; color:var(--bone); line-height:1.08; }
+    .storm-inner p { margin:1.2rem auto 0; color:rgba(245,246,242,.8); max-width:40ch; }
+    .storm-stat { margin-top:2rem; display:flex; gap:3rem; justify-content:center; flex-wrap:wrap; }
+    .storm-stat b { display:block; font-family:var(--font-num); font-size:1.8rem; color:var(--amber-glow); }
+    .storm-stat span { font-size:.8rem; letter-spacing:.08em; color:rgba(245,246,242,.7); }
+
+    /* ===== 第6屏 价格购买 ===== */
+    .buy { background:var(--ink-deep); padding:0; border-top:1px solid rgba(255,255,255,.06); }
+    .buy-inner { width:min(var(--max-w),92vw); margin-inline:auto; padding:6rem 0; display:grid; grid-template-columns:1.4fr 1fr; gap:4rem; align-items:center; }
+    .buy-left .eyebrow-level { color:var(--amber-glow); }
+    .price-line { display:flex; align-items:baseline; flex-wrap:wrap; gap:1rem; margin-top:1.2rem; }
+    .price-num { font-family:var(--font-num); font-size:clamp(3rem,7vw,4.6rem); font-weight:800; letter-spacing:-.03em; color:var(--bone); }
+    .price-old { font-size:1.2rem; color:rgba(245,246,242,.45); text-decoration:line-through; }
+    .price-tag { background:var(--amber); color:var(--ink-deep); font-size:.74rem; font-weight:700; padding:.3rem .8rem; border-radius:999px; }
+    .buy-note { margin-top:1rem; color:rgba(245,246,242,.6); font-size:.92rem; max-width:40ch; }
+    .buy-ctas { margin-top:2.2rem; display:flex; gap:1rem; flex-wrap:wrap; }
+    .buy-guarantees { margin-top:2.2rem; display:flex; gap:1.8rem; flex-wrap:wrap; color:rgba(245,246,242,.65); font-size:.86rem; }
+    .buy-right { display:flex; flex-direction:column; gap:1.1rem; }
+    .buy-feat { border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:1.4rem 1.5rem; background:rgba(255,255,255,.03); }
+    .buy-feat b { color:var(--bone); font-size:1rem; }
+    .buy-feat p { font-size:.85rem; color:rgba(245,246,242,.6); margin-top:.3rem; }
+
+    footer { background:var(--ink-deep); padding:2.5rem 0; text-align:center; color:rgba(245,246,242,.4); font-size:.85rem; border-top:1px solid rgba(255,255,255,.05); }
+    footer .brand { color:var(--amber-glow); font-weight:700; letter-spacing:.14em; }
+
+    /* 响应式 */
+    @media (max-width:860px) {
+      .feat-grid { grid-template-columns:1fr; }
+      .gallery-head { grid-template-columns:1fr; }
+      .gallery-head p { justify-self:start; }
+      .gallery-grid { grid-template-columns:1fr; grid-template-rows:auto; }
+      .g-card.tall { grid-row:auto; }
+      .buy-inner { grid-template-columns:1fr; padding:4rem 0; }
+    }
+    @media (max-width:600px) {
+      .spec-grid { grid-template-columns:1fr; }
+      .spec-strip { grid-template-columns:1fr; }
+    }
+
+    /* 减弱动态 */
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      .g-card, .spec-card, .btn, .btn-primary, .btn-ghost { transition:none !important; }
+      .storm video { animation:none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 第1屏 Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="./assets/hero-01.jpg" alt="针叶林深夜，帐篷亮着温暖琥珀光" />
+    </div>
+    <div class="hero-scrim"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow"><span>CLOUDPEAK 云端 2 Pro</span></div>
+      <h1>把荒野，装进 1.9 公斤。</h1>
+      <p>三季速开帐篷。一体化铝骨架，3 分钟安营，扛住一场深夜暴雨。</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary">立即购买</button>
+        <a class="hero-link" href="#specs">看规格</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第2屏 产品卖点 -->
+  <section class="feat" id="product">
+    <div class="wrap feat-grid">
+      <div class="feat-copy">
+        <span class="eyebrow-level">轻，但不妥协</span>
+        <h2>每一项，都在为睡个好觉让路。</h2>
+        <p class="lead">从凌晨的冻土到山口的强风，这块帐篷是你的移动庇护所。速开骨架意味着，当雨真正落下时，你已经躺进睡袋。</p>
+        <div class="spec-strip">
+          <div class="spec-item"><b>1.9kg</b><span>含地钉总重，徒步轻负担</span></div>
+          <div class="spec-item"><b>PU5000</b><span>外帐防水，一夜大雨干爽</span></div>
+          <div class="spec-item"><b>7001</b><span>铝合金骨架，抗 6 级强风</span></div>
+          <div class="spec-item"><b>3min</b><span>一体速开，雨来就安营</span></div>
+        </div>
+      </div>
+      <div class="feat-visual">
+        <img src="./assets/product-02.jpg" alt="深绿色帐篷细节特写，黄铜杆与帆布质感" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 第3屏 参数 Specs -->
+  <section class="specs" id="specs">
+    <div class="wrap">
+      <div class="specs-head">
+        <span class="eyebrow-level">规格一览</span>
+        <h2>每一寸，都有它的理由。</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-card"><small>总重量</small><b>1.9 kg</b><p>含地钉，整套带走无负担。</p></div>
+        <div class="spec-card"><small>适合人数</small><b>2 人</b><p>紧凑双人，单人或情侣都舒适。</p></div>
+        <div class="spec-card"><small>外帐防水</small><b>PU 5000mm</b><p>高防水压，连夜暴雨不怕。</p></div>
+        <div class="spec-card"><small>骨架材质</small><b>7001 铝合金</b><p>高强度轻量，抗风抗压。</p></div>
+        <div class="spec-card"><small>搭建方式</small><b>一体式速开</b><p>无需穿杆，三分钟归位。</p></div>
+        <div class="spec-card"><small>收纳尺寸</small><b>46 × 15 cm</b><p>背包侧袋或车顶箱都好放。</p></div>
+        <div class="spec-card"><small>适用季节</small><b>三季</b><p>春至深秋，够用。</p></div>
+        <div class="spec-card"><small>颜色</small><b>沙岩 / 森林绿</b><p>两种低调配色可选。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第4屏 场景图集 -->
+  <section class="gallery">
+    <div class="wrap">
+      <div class="gallery-head">
+        <h2>别只看参数，去看它扎营的地方。</h2>
+        <p>从针叶林晨雾，到高原的星空。每一种地貌，都是一种夜晚。</p>
+      </div>
+      <div class="gallery-grid">
+        <figure class="g-card tall"><img src="./assets/scene-03.jpg" alt="针叶林晨光，帐篷被琥珀色光亮包围" /><figcaption class="g-cap"><b>针叶林晨光</b><span>第一缕光穿过雾气</span></figcaption></figure>
+        <figure class="g-card"><img src="./assets/scene-04.jpg" alt="高原雪原夜空，帐篷亮着暖光" /><figcaption class="g-cap"><b>高原星空</b><span>海拔 4200m</span></figcaption></figure>
+        <figure class="g-card"><img src="./assets/scene-05.jpg" alt="湖畔晨雾，帐篷倒映在水面" /><figcaption class="g-cap"><b>湖畔晨雾</b><span>日出前的寂静</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第5屏 暴雨视频 -->
+  <section class="storm">
+    <video src="./assets/storm-rain.mp4" autoplay muted loop playsinline></video>
+    <div class="storm-scrim"></div>
+    <div class="storm-inner">
+      <span class="eyebrow-level">真正的考验</span>
+      <h2>一场暴雨，它醒着，你睡着。</h2>
+      <p>PU5000 高防水外帐。把淅沥声留在帐篷外，把安稳留在帐篷里。</p>
+      <div class="storm-stat">
+        <div><b>5000mm</b><span>外帐防水</span></div>
+        <div><b>6 级</b><span>抗风稳固</span></div>
+        <div><b>0</b><span>帐内渗漏</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第6屏 价格购买 -->
+  <section class="buy">
+    <div class="buy-inner">
+      <div class="buy-left">
+        <span class="eyebrow-level">限时装备季</span>
+        <div class="price-line">
+          <span class="price-num">¥1,299</span>
+          <span class="price-old">¥1,599</span>
+          <span class="price-tag">省 ¥300</span>
+        </div>
+        <p class="buy-note">含地钉、风绳、收纳袋。随单赠防潮垫一张，顺丰包邮。</p>
+        <div class="buy-ctas">
+          <button class="btn btn-primary">立即购买</button>
+          <button class="btn btn-ghost">加入收藏</button>
+        </div>
+        <div class="buy-guarantees"><span>7 天无理由</span><span>2 年保修</span><span>顺丰包邮</span></div>
+      </div>
+      <div class="buy-right">
+        <div class="buy-feat"><b>超轻背负</b><p>1.9kg 含地钉，徒步不拖累。</p></div>
+        <div class="buy-feat"><b>防暴雨</b><p>PU5000mm 外帐，连夜大雨。</p></div>
+        <div class="buy-feat"><b>护你安睡</b><p>一体速开，雨来就安营。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="brand">CLOUDPEAK</div>
+    <p style="margin-top:.6rem;">云端 2 Pro · 三季速开帐篷 · AI 生成素材版（第二版）</p>
+  </footer>
+
+</body>
+</html>
